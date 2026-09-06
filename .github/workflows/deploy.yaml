@@ -31,4 +31,8 @@ jobs:
             cd /root/nodejs-application-deploy-github-actions
             git pull origin master
             npm install --production
-            npm run pm2:restart
+            if pm2 describe n-2 > /dev/null; then
+              npm run pm2:restart
+            else
+              npm run pm2:start
+            fi
